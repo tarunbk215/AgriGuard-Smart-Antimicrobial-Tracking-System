@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgriGuard Dashboard</title>
+
+    <!-- Tailwind CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  </head>
+  <body class="bg-green-50 font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow p-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-green-700">
+        <a href="index.html">AgriGuard</a>
+      </h1>
+      <a
+        href="index.html"
+        class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        >Logout</a
+      >
+    </header>
+
+    <main class="max-w-7xl mx-auto p-6">
+      <!-- KPI Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-green-100 rounded-lg shadow p-5 text-center">
+          <h3 class="text-3xl font-bold text-green-700">2,500+</h3>
+          <p class="text-green-800 font-medium">Farms Monitored</p>
+        </div>
+        <div class="bg-green-100 rounded-lg shadow p-5 text-center">
+          <h3 class="text-3xl font-bold text-green-700">150K+</h3>
+          <p class="text-green-800 font-medium">Livestock Tracked</p>
+        </div>
+        <div class="bg-green-100 rounded-lg shadow p-5 text-center">
+          <h3 class="text-3xl font-bold text-green-700">99.9%</h3>
+          <p class="text-green-800 font-medium">Compliance Rate</p>
+        </div>
+        <div class="bg-green-100 rounded-lg shadow p-5 text-center">
+          <h3 class="text-3xl font-bold text-green-700">24/7</h3>
+          <p class="text-green-800 font-medium">Monitoring</p>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-xl font-bold mb-4 text-green-700">AMU Trend</h2>
+          <canvas id="amuChart"></canvas>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-xl font-bold mb-4 text-green-700">
+            Compliance Distribution
+          </h2>
+          <canvas id="complianceChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Map Section -->
+      <div class="bg-white rounded-lg shadow p-6 mb-8">
+        <h2 class="text-xl font-bold mb-4 text-green-700">Farm Locations</h2>
+        <div id="farmMap" class="w-full h-96 rounded-lg"></div>
+      </div>
+
+      <!-- Alerts -->
+      <div class="bg-white rounded-lg shadow p-6 mb-8">
+        <h2 class="text-xl font-bold mb-4 text-green-700">Alerts</h2>
+        <ul class="divide-y divide-gray-200">
+          <li class="py-2 text-red-600 font-medium">Farm A: MRL Exceedance</li>
+          <li class="py-2 text-yellow-600 font-medium">Farm B: AMU Alert</li>
+          <li class="py-2 text-green-700 font-medium">Farm C: All Clear</li>
+        </ul>
+      </div>
+
+      <!-- Farm Table -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-bold mb-4 text-green-700">Farm List</h2>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-green-100">
+              <tr>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider"
+                >
+                  Farm Name
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider"
+                >
+                  Livestock Count
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider"
+                >
+                  Compliance
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-green-700 uppercase tracking-wider"
+                >
+                  Last Inspection
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <tr>
+                <td class="px-6 py-4">Farm A</td>
+                <td class="px-6 py-4">150</td>
+                <td class="px-6 py-4 text-red-600 font-semibold">Fail</td>
+                <td class="px-6 py-4">2025-09-01</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4">Farm B</td>
+                <td class="px-6 py-4">200</td>
+                <td class="px-6 py-4 text-yellow-600 font-semibold">Warning</td>
+                <td class="px-6 py-4">2025-09-03</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4">Farm C</td>
+                <td class="px-6 py-4">120</td>
+                <td class="px-6 py-4 text-green-700 font-semibold">Pass</td>
+                <td class="px-6 py-4">2025-09-05</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- Charts JS -->
+    <script>
+      const amuCtx = document.getElementById("amuChart").getContext("2d");
+      new Chart(amuCtx, {
+        type: "line",
+        data: {
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+          datasets: [
+            {
+              label: "AMU (mg/kg)",
+              data: [120, 110, 95, 100, 85, 90],
+              borderColor: "#16a34a",
+              backgroundColor: "rgba(22, 163, 74, 0.2)",
+              fill: true,
+              tension: 0.3,
+            },
+          ],
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } },
+      });
+
+      const complianceCtx = document
+        .getElementById("complianceChart")
+        .getContext("2d");
+      new Chart(complianceCtx, {
+        type: "doughnut",
+        data: {
+          labels: ["Pass", "Warning", "Fail"],
+          datasets: [
+            {
+              data: [70, 20, 10],
+              backgroundColor: ["#16a34a", "#facc15", "#dc2626"],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: "bottom" } },
+        },
+      });
+    </script>
+
+    <!-- Leaflet Map JS -->
+    <script>
+      // Initialize map
+      const map = L.map("farmMap").setView([20.5937, 78.9629], 5); // Centered on India
+
+      // Add OpenStreetMap tiles
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+      }).addTo(map);
+
+      // Sample farm locations with compliance status
+      const farms = [
+        { name: "Farm A", lat: 19.076, lon: 72.8777, status: "Fail" },
+        { name: "Farm B", lat: 28.6139, lon: 77.209, status: "Warning" },
+        { name: "Farm C", lat: 13.0827, lon: 80.2707, status: "Pass" },
+      ];
+
+      // Add markers with colors
+      farms.forEach((farm) => {
+        let color =
+          farm.status === "Pass"
+            ? "green"
+            : farm.status === "Warning"
+            ? "orange"
+            : "red";
+        L.circleMarker([farm.lat, farm.lon], {
+          color: color,
+          radius: 10,
+          fillOpacity: 0.7,
+        })
+          .addTo(map)
+          .bindPopup(`<b>${farm.name}</b><br>Status: ${farm.status}`);
+      });
+    </script>
+  </body>
+</html>

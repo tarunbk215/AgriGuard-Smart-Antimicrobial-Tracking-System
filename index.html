@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FarmGuard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="antialiased bg-gradient-to-br from-green-50 to-blue-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <h1 class="text-2xl font-bold">
+            <a href="index.html" class="text-green-600 hover:text-green-800">
+              AgriGuard
+            </a>
+          </h1>
+          <nav class="hidden md:flex space-x-8">
+            <a href="dashboard.html" class="text-gray-700 hover:text-green-600"
+              >Dashboard</a
+            >
+            <a href="#livestock" class="text-gray-700 hover:text-green-600"
+              >Livestock</a
+            >
+            <a href="#mrl" class="text-gray-700 hover:text-green-600"
+              >MRL Tracking</a
+            >
+            <a href="#reports" class="text-gray-700 hover:text-green-600"
+              >Reports</a
+            >
+          </nav>
+          <a
+            href="login.html"
+            class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700"
+            >Login</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="relative bg-cover bg-center bg-no-repeat h-screen flex items-center justify-center"
+      style="
+        background-image: url('https://readdy.ai/api/search-image?query=Modern%20digital%20farm%20landscape%20with%20green%20pastures,width=1920,height=1080');
+      "
+    >
+      <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+      <div class="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">
+          Advanced Farm Management
+          <span class="block text-green-400">MRL & AMU Monitoring</span>
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-gray-200">
+          Comprehensive solution for tracking Maximum Residue Limits and
+          Antimicrobial Usage
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="dashboard.html"
+            class="bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700"
+            >View Dashboard</a
+          >
+          <a
+            href="#livestock"
+            class="bg-white text-green-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100"
+            >Monitor Livestock</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">
+            Farm Management Tools
+          </h2>
+          <p class="text-xl text-gray-600">
+            Monitor and manage livestock health with digital tools
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-shadow"
+          >
+            <div
+              class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-6"
+            >
+              <i class="ri-line-chart-line text-2xl text-green-600"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Real-time MRL Tracking</h3>
+            <p class="text-gray-600">
+              Instant alerts and compliance monitoring.
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-shadow"
+          >
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6"
+            >
+              <i class="ri-medicine-bottle-line text-2xl text-blue-600"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">AMU Monitoring</h3>
+            <p class="text-gray-600">
+              Track antimicrobial usage and withdrawal periods.
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-shadow"
+          >
+            <div
+              class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-6"
+            >
+              <i class="ri-dashboard-3-line text-2xl text-purple-600"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-4">Interactive Dashboard</h3>
+            <p class="text-gray-600">
+              Data visualization and trend analysis panels.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-16 bg-green-600">
+      <div
+        class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 text-center text-white"
+      >
+        <div>
+          <div class="text-4xl font-bold mb-2">2,500+</div>
+          <p class="text-green-200">Farms Monitored</p>
+        </div>
+        <div>
+          <div class="text-4xl font-bold mb-2">150K+</div>
+          <p class="text-green-200">Livestock Tracked</p>
+        </div>
+        <div>
+          <div class="text-4xl font-bold mb-2">99.9%</div>
+          <p class="text-green-200">Compliance</p>
+        </div>
+        <div>
+          <div class="text-4xl font-bold mb-2">24/7</div>
+          <p class="text-green-200">Monitoring</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-gray-900 text-center text-white">
+      <h2 class="text-4xl font-bold mb-6">Ready to Transform Your Farm?</h2>
+      <p class="text-xl text-gray-300 mb-8">
+        Join thousands of farmers using AgriGuard
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="login.html"
+          class="bg-green-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700"
+          >Get Started</a
+        >
+        <a
+          href="#contact"
+          class="border border-gray-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-800"
+          >Contact Sales</a
+        >
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-2xl font-bold">
+            <a href="index.html" class="text-green-600 hover:text-green-800">
+              AgriGuard
+            </a>
+          </h3>
+          <p class="text-gray-300">
+            Digital farm management for livestock health.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Platform</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li>
+              <a href="dashboard.html" class="hover:text-green-400"
+                >Dashboard</a
+              >
+            </li>
+            <li>
+              <a href="#livestock" class="hover:text-green-400">Livestock</a>
+            </li>
+            <li>
+              <a href="#mrl" class="hover:text-green-400">MRL Tracking</a>
+            </li>
+            <li><a href="#reports" class="hover:text-green-400">Reports</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Support</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li>
+              <a href="#contact" class="hover:text-green-400">Contact Us</a>
+            </li>
+            <li>
+              <a href="#help" class="hover:text-green-400">Help Center</a>
+            </li>
+            <li>
+              <a href="#docs" class="hover:text-green-400">Documentation</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Company</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="#about" class="hover:text-green-400">About Us</a></li>
+            <li><a href="#careers" class="hover:text-green-400">Careers</a></li>
+            <li>
+              <a href="#privacy" class="hover:text-green-400">Privacy Policy</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>© 2025 AgriGuard. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
